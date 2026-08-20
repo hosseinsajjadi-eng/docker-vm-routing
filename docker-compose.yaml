@@ -1,0 +1,22 @@
+services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    restart: unless-stopped
+
+    networks:
+      network1:
+        ipv4_address: 192.168.2.2
+
+networks:
+  network1:
+    name: network1
+    driver: bridge
+
+    driver_opts:
+      com.docker.network.bridge.trusted_host_interfaces: "enp0s3"
+
+    ipam:
+      config:
+        - subnet: 192.168.2.0/24
+          gateway: 192.168.2.1
